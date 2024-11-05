@@ -38,15 +38,17 @@
         <div class="video-cell">
             <iframe class="yte1"
                     id="yte1"
-                    src="https://www.youtube.com/embed/live_stream?channel=UCSNBahoyPlMUz-3U2e_Czcw"
+                    src="https://www.youtube.com/embed/live_stream?channel=UCSNBahoyPlMUz-3U2e_Czcw&enablejsapi=1&version=3"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    enablejsapi="1"
                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         <div class="video-cell">
             <iframe class="yte2"
                     id="yte2"
-                    src="https://www.youtube.com/embed/live_stream?channel=UC554eY5jNUfDq3yDOJYirOQ"
+                    src="https://www.youtube.com/embed/live_stream?channel=UC554eY5jNUfDq3yDOJYirOQ&enablejsapi=1&version=3"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    enablejsapi="1"
                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
 <!--        <div class="video-cell">-->
@@ -69,25 +71,53 @@
 
 
 <script>
-    (function () {
-
+    function setupYtc1(ytc1id) {
         let ytc1f = document.createElement("iframe");
         ytc1f.referrerPolicy = "origin";
-        ytc1f.allowFullscreen = true;
-        ytc1f.enablejsapi = 1;
-        ytc1f.src = "https://www.youtube.com/live_chat?v=OFMUSoWS3hc&enablejsapi=1&version=3&embed_domain=" + window.location.hostname;
-        ytc1f.id = "chat-embed1";
+        ytc1f.src = `https://www.youtube.com/live_chat?v=${ytc1id}&embed_domain=${window.location.hostname}`;
         document.querySelector('.ytc1').appendChild(ytc1f);
+    }
 
+    function setupYtc2(ytc2id) {
         let ytc2f = document.createElement("iframe");
         ytc2f.referrerPolicy = "origin";
-        ytc2f.allowFullscreen = true;
-        ytc2f.enablejsapi = 1;
-        ytc2f.src = "https://www.youtube.com/live_chat?v=Eoxi-gKnHDg&enablejsapi=1&version=3&embed_domain=" + window.location.hostname;
-        ytc2f.id = "chat-embed2";
+        ytc2f.src = `https://www.youtube.com/live_chat?v=${ytc2id}&embed_domain=${window.location.hostname}`;
         document.querySelector('.ytc2').appendChild(ytc2f);
+    }
 
-    })();
+    let yte1;
+    let yte2;
+
+    function onYte1Ready() {
+        var url = yte1.getVideoUrl();
+        const match = url.match('/watch\\?v=([^&]+)');
+        if (match && match[1]) {
+            let ytc1id = match[1];
+            setupYtc1(ytc1id);
+        }
+    }
+    function onYte2Ready() {
+        var url = yte2.getVideoUrl();
+        const match = url.match('/watch\\?v=([^&]+)');
+        if (match && match[1]) {
+            let ytc2id = match[1];
+            setupYtc2(ytc2id);
+        }
+    }
+    function onYouTubeIframeAPIReady() {
+        yte1 = new YT.Player('yte1', {
+            events: {
+                onReady: onYte1Ready,
+                // onStateChange: onYte1StateChange,
+            }
+        })
+        yte2 = new YT.Player('yte2', {
+            events: {
+                onReady: onYte2Ready,
+                // onStateChange: onYte2StateChange,
+            }
+        })
+    }
 </script>
 
 </body>
