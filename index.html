@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>multi</title>
+    <style>
+        html, body, .wrapper, iframe {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 50% 50%;
+        }
+        .row {
+            display: grid;
+            grid-template-columns: repeat(12, auto);
+        }
+        .video-cell {
+            grid-column-end: span 4;
+        }
+        .chat-cell {
+            grid-column-end: span 3;
+        }
+    </style>
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="row">
+        <div class="video-cell">
+            <iframe class="yte1"
+                    id="yte1"
+                    src="https://www.youtube.com/embed/live_stream?channel=UCSNBahoyPlMUz-3U2e_Czcw"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="video-cell">
+            <iframe class="yte2"
+                    id="yte2"
+                    src="https://www.youtube.com/embed/live_stream?channel=UC554eY5jNUfDq3yDOJYirOQ"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <div class="video-cell">
+            <iframe class="embed-frame" allow="fullscreen; autoplay; encrypted-media; picture-in-picture; web-share"
+                    src="https://player.kick.com/Destiny?autoplay=true"></iframe>
+        </div>
+    </div>
+    <div class="row">
+        <div class="chat-cell">
+            <iframe src="https://www.destiny.gg/embed/chat"></iframe>
+        </div>
+        <div class="chat-cell ytc1"></div>
+        <div class="chat-cell ytc2"></div>
+        <div class="chat-cell">
+            <iframe src="https://kick.com/destiny/chatroom"></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+
+        let ytc1f = document.createElement("iframe");
+        ytc1f.referrerPolicy = "origin";
+        ytc1f.allowFullscreen = true;
+        ytc1f.enablejsapi = 1;
+        ytc1f.src = "https://www.youtube.com/live_chat?v=OFMUSoWS3hc&enablejsapi=1&version=3&embed_domain=" + window.location.hostname;
+        ytc1f.id = "chat-embed2";
+        document.querySelector('.ytc1').appendChild(ytc1f);
+
+        let ytc2f = document.createElement("iframe");
+        ytc2f.referrerPolicy = "origin";
+        ytc2f.allowFullscreen = true;
+        ytc2f.enablejsapi = 1;
+        ytc2f.src = "https://www.youtube.com/live_chat?v=Eoxi-gKnHDg&enablejsapi=1&version=3&embed_domain=" + window.location.hostname;
+        ytc2f.id = "chat-embed2";
+        document.querySelector('.ytc2').appendChild(ytc2f);
+
+    })();
+</script>
+
+</body>
+</html>
