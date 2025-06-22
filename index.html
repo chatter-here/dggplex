@@ -4,6 +4,10 @@
     <meta charset="utf-8"/>
     <title>dggplex</title>
     <style>
+        :root {
+            --videos: 1;
+            --chats: 2;
+        }
         html {
             overflow: hidden;
         }
@@ -24,10 +28,10 @@
             grid-template-columns: repeat(12, auto);
         }
         .video-cell {
-            grid-column-end: span 6;
+            grid-column-end: span calc(12/var(--videos));
         }
         .chat-cell {
-            grid-column-end: span 4;
+            grid-column-end: span calc(12/var(--chats));
         }
     </style>
     <script src="https://www.youtube.com/iframe_api"></script>
@@ -35,14 +39,14 @@
 <body>
 <div class="wrapper">
     <div class="row">
-        <div class="video-cell">
-            <iframe class="yte1"
-                    id="yte1"
-                    src="https://www.youtube.com/embed/live_stream?channel=UCSNBahoyPlMUz-3U2e_Czcw&enablejsapi=1&version=3"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    enablejsapi="1"
-                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
+<!--         <div class="video-cell"> -->
+<!--             <iframe class="yte1" -->
+<!--                     id="yte1" -->
+<!--                     src="https://www.youtube.com/embed/live_stream?channel=UCSNBahoyPlMUz-3U2e_Czcw&enablejsapi=1&version=3" -->
+<!--                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" -->
+<!--                     enablejsapi="1" -->
+<!--                     referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+<!--         </div> -->
         <div class="video-cell">
             <iframe class="yte2"
                     id="yte2"
@@ -61,7 +65,7 @@
         <div class="chat-cell">
             <iframe src="https://www.destiny.gg/embed/chat"></iframe>
         </div>
-        <div class="chat-cell ytc1"></div>
+<!--         <div class="chat-cell ytc1"></div> -->
         <div class="chat-cell ytc2"></div>
 <!--        <div class="chat-cell">-->
 <!--            <iframe src="https://kick.com/destiny/chatroom"></iframe>-->
@@ -71,12 +75,12 @@
 
 
 <script>
-    function setupYtc1(ytc1id) {
-        let ytc1f = document.createElement("iframe");
-        ytc1f.referrerPolicy = "origin";
-        ytc1f.src = `https://www.youtube.com/live_chat?v=${ytc1id}&embed_domain=${window.location.hostname}`;
-        document.querySelector('.ytc1').appendChild(ytc1f);
-    }
+    // function setupYtc1(ytc1id) {
+    //     let ytc1f = document.createElement("iframe");
+    //     ytc1f.referrerPolicy = "origin";
+    //     ytc1f.src = `https://www.youtube.com/live_chat?v=${ytc1id}&embed_domain=${window.location.hostname}`;
+    //     document.querySelector('.ytc1').appendChild(ytc1f);
+    // }
 
     function setupYtc2(ytc2id) {
         let ytc2f = document.createElement("iframe");
@@ -85,17 +89,17 @@
         document.querySelector('.ytc2').appendChild(ytc2f);
     }
 
-    let yte1;
+    // let yte1;
     let yte2;
 
-    function onYte1Ready() {
-        var url = yte1.getVideoUrl();
-        const match = url.match('/watch\\?v=([^&]+)');
-        if (match && match[1]) {
-            let ytc1id = match[1];
-            setupYtc1(ytc1id);
-        }
-    }
+    // function onYte1Ready() {
+    //     var url = yte1.getVideoUrl();
+    //     const match = url.match('/watch\\?v=([^&]+)');
+    //     if (match && match[1]) {
+    //         let ytc1id = match[1];
+    //         setupYtc1(ytc1id);
+    //     }
+    // }
     function onYte2Ready() {
         var url = yte2.getVideoUrl();
         const match = url.match('/watch\\?v=([^&]+)');
@@ -105,12 +109,12 @@
         }
     }
     function onYouTubeIframeAPIReady() {
-        yte1 = new YT.Player('yte1', {
-            events: {
-                onReady: onYte1Ready,
-                // onStateChange: onYte1StateChange,
-            }
-        })
+        // yte1 = new YT.Player('yte1', {
+        //     events: {
+        //         onReady: onYte1Ready,
+        //         // onStateChange: onYte1StateChange,
+        //     }
+        // })
         yte2 = new YT.Player('yte2', {
             events: {
                 onReady: onYte2Ready,
